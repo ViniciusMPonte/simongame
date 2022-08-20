@@ -12,31 +12,31 @@ var wrongAudio = new Audio("sounds/wrong.mp3");
 
 function buttonAnimation(result) {
 
-    $(result).addClass("pressed");
+  $(result).addClass("pressed");
 
-    setTimeout(function () {
-        $(result).removeClass("pressed");
-    }, 100);
+  setTimeout(function() {
+    $(result).removeClass("pressed");
+  }, 100);
 }
 
-$("#green").click(function () {
-    greenAudio.play();
-    buttonAnimation(this);
+$("#green").click(function() {
+  greenAudio.play();
+  buttonAnimation(this);
 })
 
-$("#red").click(function () {
-    redAudio.play();
-    buttonAnimation(this);
+$("#red").click(function() {
+  redAudio.play();
+  buttonAnimation(this);
 })
 
-$("#yellow").click(function () {
-    yellowAudio.play();
-    buttonAnimation(this);
+$("#yellow").click(function() {
+  yellowAudio.play();
+  buttonAnimation(this);
 })
 
-$("#blue").click(function () {
-    blueAudio.play();
-    buttonAnimation(this);
+$("#blue").click(function() {
+  blueAudio.play();
+  buttonAnimation(this);
 })
 
 
@@ -45,32 +45,36 @@ $("#blue").click(function () {
 
 function randomGame() {
 
-    switch (Math.floor(Math.random() * 4)) {
-        case 0: var result = ".green";
-            greenAudio.play();
-            $("#green").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
+  switch (Math.floor(Math.random() * 4)) {
+    case 0:
+      var result = ".green";
+      greenAudio.play();
+      $("#green").fadeIn(100).fadeOut(100).fadeIn(100);
+      break;
 
-        case 1: var result = ".red";
-            redAudio.play();
-            $("#red").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
+    case 1:
+      var result = ".red";
+      redAudio.play();
+      $("#red").fadeIn(100).fadeOut(100).fadeIn(100);
+      break;
 
-        case 2: var result = ".yellow";
-            yellowAudio.play();
-            $("#yellow").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
+    case 2:
+      var result = ".yellow";
+      yellowAudio.play();
+      $("#yellow").fadeIn(100).fadeOut(100).fadeIn(100);
+      break;
 
-        case 3: var result = ".blue";
-            blueAudio.play();
-            $("#blue").fadeIn(100).fadeOut(100).fadeIn(100);
-            break;
+    case 3:
+      var result = ".blue";
+      blueAudio.play();
+      $("#blue").fadeIn(100).fadeOut(100).fadeIn(100);
+      break;
 
-        default:
-            break;
-    }
-    newLevel(result);
-    return (result);
+    default:
+      break;
+  }
+  newLevel(result);
+  return (result);
 
 }
 
@@ -82,31 +86,31 @@ var answerNumber = 0;
 
 function comparador() {
 
-    if (allResults[answerNumber] === allPlayerAnswer[answerNumber]) {
-        console.log("é a mesma resposta");
+  if (allResults[answerNumber] === allPlayerAnswer[answerNumber]) {
+    console.log("é a mesma resposta");
 
-        answerNumber++;
+    answerNumber++;
 
-        if (answerNumber === allResults.length) {
+    if (answerNumber === allResults.length) {
 
-            allPlayerAnswer = [];
-            answerNumber = 0;
+      allPlayerAnswer = [];
+      answerNumber = 0;
 
-            setTimeout(function () {
-                randomGame();
-            }, 1000);
+      setTimeout(function() {
+        randomGame();
+      }, 1000);
 
-            console.log("Novo nivel");
-
-        } else {
-            console.log("próxima checagem");
-        }
+      console.log("Novo nivel");
 
     } else {
-        console.log("Errou");
-        answerNumber = 0;
-        gameOver();
+      console.log("próxima checagem");
     }
+
+  } else {
+    console.log("Errou");
+    answerNumber = 0;
+    gameOver();
+  }
 }
 
 
@@ -116,8 +120,8 @@ function comparador() {
 var allResults = [];
 
 function newLevel(result) {
-    allResults.push(result);
-    $("#level-title").text("Nível " + allResults.length);
+  allResults.push(result);
+  $("#level-title").text("Nível " + allResults.length);
 }
 
 
@@ -126,39 +130,44 @@ function newLevel(result) {
 
 var allPlayerAnswer = [];
 
-$(".btn").click(function () {
-    allPlayerAnswer.push("." + this.id);
-    comparador();
+$(".btn").click(function() {
+  allPlayerAnswer.push("." + this.id);
+  comparador();
 })
 
 
 
 //Início
 
-$(document).keydown(function () {
 
-    if (allResults.length === 0) {
+$(".startGame").click(function() {
 
-        var result = randomGame();
-    }
+  if (allResults.length === 0) {
+    $(".buttonStartGame").removeClass("startGame");
+    var result = randomGame();
+  }
 
 });
+
+
+
 
 
 
 //Game Over
 
 function gameOver() {
-    allResults = [];
-    allPlayerAnswer = [];
+  allResults = [];
+  allPlayerAnswer = [];
 
-    $("body").addClass("game-over");
+  $("body").addClass("game-over");
+  $(".buttonStartGame").addClass("startGame");
+  
+  setTimeout(function() {
+    $("body").removeClass("game-over");
+  }, 200);
 
-    setTimeout(function () {
-        $("body").removeClass("game-over");
-    }, 200);
+  wrongAudio.play();
 
-    wrongAudio.play();
-
-    $("#level-title").text("Fim de Jogo, pressione qualquer tecla para Reiniciar");
+  $("#level-title").text("Fim de Jogo, toque ou clique na tela para reiniciar");
 }
