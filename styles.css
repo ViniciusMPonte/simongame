@@ -1,6 +1,7 @@
 body {
   text-align: center;
   background-color: #011F3F;
+  position: relative;
 }
 
 #level-title {
@@ -50,4 +51,12 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+}
+
+.startGame {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
