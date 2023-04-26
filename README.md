@@ -4,6 +4,10 @@ Essa é uma recriação jogo chamado Simon, onde o jogador deve memorizar uma se
 
 O jogo pode ser acessado através do link https://viniciusmponte.github.io/simongame/
 
+## Screenshot
+
+<img src="https://raw.githubusercontent.com/ViniciusMPonte/portfolio/main/images/Simon.png" style="width: 500px; height: auto;">
+
 ## Tecnologias utilizadas
 
 - HTML
